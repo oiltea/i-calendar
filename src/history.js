@@ -13,7 +13,7 @@ export default async function history() {
     return new Response("History Today API error", { status: 502 })
   }
 
-  now = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z"
+  const dtstamp = now.toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z"
 
   const ics = [
     "BEGIN:VCALENDAR",
@@ -35,7 +35,7 @@ export default async function history() {
     ics.push(
       "BEGIN:VEVENT",
       `UID:${date}-${i.year}-${encodeURIComponent(i.title)}`,
-      `DTSTAMP:${now}`,
+      `DTSTAMP:${dtstamp}`,
       `DTSTART;VALUE=DATE:${mm}${dd}`,
       `SUMMARY:${i.title}`,
       `DESCRIPTION:${descLines.join("\\n")}`,

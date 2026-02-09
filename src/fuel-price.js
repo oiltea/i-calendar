@@ -1,4 +1,4 @@
-export default async function weather(request) {
+export default async function fuelPrice(request) {
   const url = new URL(request.url)
   const region = url.searchParams.get("region")
 

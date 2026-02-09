@@ -9,7 +9,8 @@
  */
 
 import weather from "./weather"
-import fuel from "./fuel"
+import fuelPrice from "./fuel-price"
+import goldPrice from "./gold-price"
 import history from "./history"
 
 export default {
@@ -20,8 +21,12 @@ export default {
       return weather(request)
     }
 
-    if (url.pathname === "/fuel.ics") {
-      return fuel(request)
+    if (url.pathname === "/fuel-price.ics") {
+      return fuelPrice(request)
+    }
+
+    if (url.pathname === "/gold-price.ics") {
+      return goldPrice(request)
     }
 
     if (url.pathname === "/history.ics") {

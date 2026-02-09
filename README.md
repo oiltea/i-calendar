@@ -10,7 +10,13 @@ https://i-calendar.oiltea94.workers.dev/weather.ics?query=成都&days=8
 ## 燃油价格
 
 ```
-https://i-calendar.oiltea94.workers.dev/fuel.ics?region=四川成都
+https://i-calendar.oiltea94.workers.dev/fuel-price.ics?region=四川成都
+```
+
+## 今日金价
+
+```
+https://i-calendar.oiltea94.workers.dev/gold-price.ics
 ```
 
 ## 历史上的今天
