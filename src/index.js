@@ -11,7 +11,7 @@
 import weather from "./weather"
 import fuelPrice from "./fuel-price"
 import goldPrice from "./gold-price"
-import history from "./history"
+import todayInHistory from "./today-in-history"
 
 export default {
   async fetch(request) {
@@ -29,8 +29,8 @@ export default {
       return goldPrice(request)
     }
 
-    if (url.pathname === "/history.ics") {
-      return history(request)
+    if (url.pathname === "/today-in-history.ics") {
+      return todayInHistory(request)
     }
 
     return new Response("Not Found", { status: 404 })

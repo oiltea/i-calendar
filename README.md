@@ -22,5 +22,5 @@ https://i-calendar.oiltea94.workers.dev/gold-price.ics
 ## 历史上的今天
 
 ```
-https://i-calendar.oiltea94.workers.dev/history.ics
+https://i-calendar.oiltea94.workers.dev/today-in-history.ics
 ```
