@@ -1,10 +1,7 @@
 export default async function weather(request) {
   const url = new URL(request.url)
   const query = url.searchParams.get("query")
-  const days = Math.min(
-    parseInt(url.searchParams.get("days") || "3", 10),
-    8
-  )
+  const days = Math.min(parseInt(url.searchParams.get("days") || "3", 10), 8)
 
   if (!query) {
     return new Response("Missing query parameter", { status: 400 })
@@ -24,10 +21,10 @@ export default async function weather(request) {
   let ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Weather Calendar 60s//CN",
+    "PRODID:-//Weather Calendar//CN",
     "CALSCALE:GREGORIAN",
     `X-WR-CALNAME:天气预报（${query}）`,
-    "X-WR-CALDESC:天气数据来自 60s API",
+    "X-WR-CALDESC:数据来自 60s API",
     "X-WR-TIMEZONE:Asia/Shanghai",
   ]
 
@@ -37,6 +34,14 @@ export default async function weather(request) {
     endDate.setDate(endDate.getDate() + 1)
     const end = endDate.toISOString().slice(0, 10).replace(/-/g, "")
 
+    const descLines = []
+    descLines.push(`📆 日期：${d.date}`)
+    descLines.push(`🌡 温度：${d.min_temperature}℃~${d.max_temperature}℃`)
+    descLines.push(`☀ 白天天气：${d.day_condition}`)
+    descLines.push(`🌙 夜间天气：${d.night_condition}`)
+    descLines.push(`😷空气质量：${d.air_quality}`)
+    descLines.push(`🔗 数据来源：腾讯天气`)
+
     ics.push(
       "BEGIN:VEVENT",
       `UID:${start}-${query}@weather`,
@@ -44,7 +49,7 @@ export default async function weather(request) {
       `DTSTART;VALUE=DATE:${start}`,
       `DTEND;VALUE=DATE:${end}`,
       `SUMMARY:${query} ${d.day_condition} ${d.min_temperature}℃~${d.max_temperature}℃`,
-      `DESCRIPTION:白天 ${d.day_condition}｜夜间 ${d.night_condition}`,
+      `DESCRIPTION:${descLines.join("\\n")}`,
       "END:VEVENT"
     )
   }

@@ -10,6 +10,7 @@
 
 import weather from "./weather"
 import fuel from "./fuel"
+import history from "./history"
 
 export default {
   async fetch(request) {
@@ -23,6 +24,10 @@ export default {
       return fuel(request)
     }
 
+    if (url.pathname === "/history.ics") {
+      return history(request)
+    }
+
     return new Response("Not Found", { status: 404 })
-  },
+  }
 }
