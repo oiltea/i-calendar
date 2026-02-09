@@ -30,10 +30,8 @@ export default async function weather(request) {
 
   // 主事件：展示所有价格
   let summary = `燃油价格 (${region})`
-  let descLines = data.items.map(i => `⛽ ${i.name}：${i.price_desc}`)
-  descLines.unshift(`📍 地区：${data.region}`)
+  let descLines = data.items.map(i => `${i.name}：${i.price_desc}`)
   descLines.push(`📆 更新时间：${data.updated}`)
-  descLines.push(`🔗 数据来源：${data.link}`)
 
   ics.push(
     "BEGIN:VEVENT",

@@ -40,7 +40,6 @@ export default async function weather(request) {
     descLines.push(`☀ 白天天气：${d.day_condition}`)
     descLines.push(`🌙 夜间天气：${d.night_condition}`)
     descLines.push(`😷 空气质量：${d.air_quality}`)
-    descLines.push(`🔗 数据来源：腾讯天气`)
 
     ics.push(
       "BEGIN:VEVENT",
