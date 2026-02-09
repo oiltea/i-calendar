@@ -7,16 +7,13 @@ export default async function history() {
   const api = `https://60s.viki.moe/v2/today-in-history`
   const resp = await fetch(api)
   const json = await resp.json()
-  const items = json.data?.items || []
+  const items = json?.data?.items
 
   if (!items) {
     return new Response("History Today API error", { status: 502 })
   }
 
-  const dtstamp = new Date()
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .slice(0, 15) + "Z"
+  now = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z"
 
   const ics = [
     "BEGIN:VCALENDAR",
@@ -38,7 +35,7 @@ export default async function history() {
     ics.push(
       "BEGIN:VEVENT",
       `UID:${date}-${i.year}-${encodeURIComponent(i.title)}`,
-      `DTSTAMP:${dtstamp}`,
+      `DTSTAMP:${now}`,
       `DTSTART;VALUE=DATE:${mm}${dd}`,
       `SUMMARY:${i.title}`,
       `DESCRIPTION:${descLines.join("\\n")}`,

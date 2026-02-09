@@ -35,11 +35,11 @@ export default async function weather(request) {
     const end = endDate.toISOString().slice(0, 10).replace(/-/g, "")
 
     const descLines = []
-    descLines.push(`📆 日期：${d.date}`)
     descLines.push(`🌡 温度：${d.min_temperature}℃~${d.max_temperature}℃`)
     descLines.push(`☀ 白天天气：${d.day_condition}`)
     descLines.push(`🌙 夜间天气：${d.night_condition}`)
     descLines.push(`😷 空气质量：${d.air_quality}`)
+    descLines.push(`📆 日期：${d.date}`)
 
     ics.push(
       "BEGIN:VEVENT",

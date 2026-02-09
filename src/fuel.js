@@ -9,7 +9,7 @@ export default async function weather(request) {
   const api = `https://60s.viki.moe/v2/fuel-price?region=${encodeURIComponent(region)}`
   const resp = await fetch(api)
   const json = await resp.json()
-  const data = json.data || []
+  const data = json?.data || []
 
   if (!data) {
     return new Response("Fuel Price API error", { status: 502 })
@@ -31,7 +31,7 @@ export default async function weather(request) {
   // 主事件：展示所有价格
   let summary = `燃油价格 (${region})`
   let descLines = data.items.map(i => `${i.name}：${i.price_desc}`)
-  descLines.push(`📆 更新时间：${data.updated}`)
+  descLines.push(`更新时间：${data.updated}`)
 
   ics.push(
     "BEGIN:VEVENT",
